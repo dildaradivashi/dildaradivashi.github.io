@@ -36,52 +36,34 @@
         ::-webkit-scrollbar-track { background: #0c0a09; }
         ::-webkit-scrollbar-thumb { background: #2e2622; border-radius: 9999px; }
         ::-webkit-scrollbar-thumb:hover { background: #e05a2b; }
-
         .tribal-border-top {
             background: repeating-linear-gradient(135deg, #e05a2b, #e05a2b 8px, #f59e0b 8px, #f59e0b 16px, #10b981 16px, #10b981 24px);
             height: 3px;
-        }
-
-        @keyframes eq-bar {
-            0%, 100% { height: 4px; }
-            50% { height: 18px; }
-        }
-        .eq-bar-1 { animation: eq-bar 0.7s infinite ease-in-out; }
-        .eq-bar-2 { animation: eq-bar 0.5s infinite ease-in-out 0.2s; }
-        .eq-bar-3 { animation: eq-bar 0.8s infinite ease-in-out 0.4s; }
-        .eq-bar-4 { animation: eq-bar 0.6s infinite ease-in-out 0.1s; }
-
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            cursor: pointer;
-        }
-        input[type="range"]::-webkit-slider-runnable-track {
-            background: #2e2622;
-            height: 5px;
-            border-radius: 999px;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            margin-top: -5px;
-            background-color: #f59e0b;
-            height: 15px;
-            width: 15px;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
-            transition: transform 0.15s ease;
         }
     </style>
 </head>
 <body class="bg-tribal-bg text-stone-100 font-sans antialiased selection:bg-tribal-terracotta selection:text-white h-screen flex flex-col overflow-hidden">
 
-    <!-- Top Decorative Tribal Ribbon -->
+    <!-- Top Ribbon -->
     <div class="tribal-border-top w-full shrink-0 z-50"></div>
 
-    <!-- Main Container -->
     <div class="flex flex-1 overflow-hidden relative">
+
+        <!-- Mobile Header (Visible only on phone) -->
+        <header class="md:hidden sticky top-0 z-20 backdrop-blur-xl bg-[#120e0c]/90 border-b border-tribal-border/70 px-4 py-3.5 flex items-center justify-between gap-3 w-full absolute">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-tribal-terracotta to-amber-500 overflow-hidden flex items-center justify-center">
+                    <img src="https://img.youtube.com/vi/t5BkwJjhYHQ/hqdefault.jpg" alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="font-display font-bold text-sm text-white">DiL DAR ADIVASHI</h1>
+                    <span class="text-[10px] text-amber-400 font-semibold">81.1K Subscribers</span>
+                </div>
+            </div>
+            <button onclick="window.app.openUploadModal()" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-tribal-terracotta to-amber-500 text-white shadow-lg">
+                <i class="ph-bold ph-plus-circle"></i> Add
+            </button>
+        </header>
 
         <!-- Sidebar (Desktop) -->
         <aside class="w-64 bg-[#120f0d] border-r border-tribal-border flex-col justify-between shrink-0 hidden md:flex z-30 select-none">
@@ -102,20 +84,6 @@
 
                 <!-- Nav Menu -->
                 <nav class="space-y-1.5">
-                    <button onclick="window.app.switchNav('home')" id="nav-home" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-tribal-terracotta/15 text-amber-400 border border-tribal-terracotta/30">
-                        <i class="ph-fill ph-house text-lg"></i>
-                        <span>All Channel Songs</span>
-                    </button>
-                    <button onclick="window.app.switchNav('liked')" id="nav-liked" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-400 hover:text-stone-100 hover:bg-stone-800/50 transition-all">
-                        <i class="ph-fill ph-heart text-lg text-rose-500"></i>
-                        <span>Liked Songs</span>
-                        <span id="liked-count-badge" class="ml-auto text-xs bg-stone-800 text-stone-300 px-2 py-0.5 rounded-full">0</span>
-                    </button>
-                    <button onclick="window.app.switchNav('community')" id="nav-community" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-400 hover:text-stone-100 hover:bg-stone-800/50 transition-all">
-                        <i class="ph-fill ph-users-three text-lg text-emerald-400"></i>
-                        <span>New Uploaded Tracks</span>
-                        <span id="community-count-badge" class="ml-auto text-xs bg-emerald-950/80 text-emerald-300 border border-emerald-700/40 px-2 py-0.5 rounded-full">0</span>
-                    </button>
                     <a href="https://youtube.com/@dildaradivashi?si=1oy-3FeSI7Os98kw" target="_blank" rel="noopener noreferrer" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-rose-400 hover:bg-rose-950/30 transition-all">
                         <i class="ph-fill ph-youtube-logo text-lg"></i>
                         <span>@dildaradivashi Channel</span>
@@ -125,180 +93,116 @@
                         <span>Add / Upload Song</span>
                     </button>
                 </nav>
-
-                <!-- Categories -->
-                <div class="pt-3 border-t border-tribal-border">
-                    <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-stone-500 mb-2.5">Music Categories</p>
-                    <div class="space-y-1 max-h-52 overflow-y-auto pr-1" id="sidebar-categories"></div>
-                </div>
             </div>
         </aside>
 
         <!-- Main Viewport -->
-        <main class="flex-1 flex flex-col overflow-y-auto bg-gradient-to-b from-[#1e1410] via-tribal-bg to-tribal-bg pb-32" id="main-scroll">
-
-            <!-- Sticky Top Header -->
-            <header class="sticky top-0 z-20 backdrop-blur-xl bg-[#120e0c]/80 border-b border-tribal-border/70 px-4 sm:px-7 py-3.5 flex items-center justify-between gap-3">
-                <div class="flex items-center gap-3 md:hidden">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-tribal-terracotta to-amber-500 overflow-hidden flex items-center justify-center">
-                        <img src="https://img.youtube.com/vi/t5BkwJjhYHQ/hqdefault.jpg" alt="Logo" class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h1 class="font-display font-bold text-sm text-white">DiL DAR ADIVASHI</h1>
-                        <span class="text-[10px] text-amber-400 font-semibold">81.1K Subscribers</span>
-                    </div>
-                </div>
-
-                <!-- Search Bar -->
-                <div class="relative flex-1 max-w-md">
-                    <i class="ph ph-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-lg"></i>
-                    <input 
-                        type="text" 
-                        id="search-input"
-                        oninput="window.app.handleSearch(this.value)"
-                        placeholder="Search Timli, Gamit Song, Tur Tone, Rodali..." 
-                        class="w-full pl-10 pr-9 py-2 bg-stone-900/90 border border-tribal-border focus:border-amber-500/70 rounded-full text-sm text-stone-100 placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all"
-                    >
-                    <button id="clear-search-btn" onclick="window.app.clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-white">
-                        <i class="ph-fill ph-x-circle"></i>
-                    </button>
-                </div>
-
-                <div class="flex items-center gap-2.5">
-                    <a href="https://youtube.com/@dildaradivashi?si=1oy-3FeSI7Os98kw" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-rose-600/90 hover:bg-rose-500 text-white shadow-lg transition-all">
-                        <i class="ph-fill ph-youtube-logo text-base"></i>
-                        <span>Subscribe</span>
-                    </a>
-                </div>
-            </header>
-
+        <main class="flex-1 flex flex-col overflow-y-auto bg-gradient-to-b from-[#1e1410] via-tribal-bg to-tribal-bg pb-32 pt-16 md:pt-0" id="main-scroll">
             <!-- Content Area -->
             <div class="px-4 sm:px-7 py-6 space-y-8 max-w-7xl mx-auto w-full">
 
                 <!-- Hero Banner -->
-                <section class="relative rounded-3xl overflow-hidden border border-amber-500/25 shadow-2xl bg-gradient-to-r from-[#2c1209] via-[#1c1613] to-[#0a2319] p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="space-y-3 max-w-2xl">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-semibold">
-                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                            DiL DAR ADIVASHI OFFICIAL MUSIC HUB
-                        </div>
-                        <h1 class="font-display text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                            Non-Stop <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-emerald-400">Adivasi Timli & Gamit Hits</span>
-                        </h1>
-                        <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
-                            Welcome to the official streaming platform of <strong>DiL DAR ADIVASHI</strong> (@dildaradivashi). Stream Superhit Non-Stop Timli 2026, Tur Tone DJ Mixes, Rodali, and Gamit songs directly!
-                        </p>
-                        <div class="pt-2 flex flex-wrap items-center gap-3">
-                            <button onclick="window.app.playFeaturedTrack()" class="flex items-center gap-2.5 px-6 py-3 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm shadow-xl transition-all transform hover:-translate-y-0.5">
-                                <i class="ph-fill ph-play text-lg"></i>
-                                <span>Play Superhit Timli</span>
-                            </button>
-                        </div>
+                <section class="relative rounded-3xl overflow-hidden border border-amber-500/25 shadow-2xl bg-gradient-to-r from-[#2c1209] via-[#1c1613] to-[#0a2319] p-6 sm:p-10 flex flex-col items-start gap-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                        DiL DAR ADIVASHI OFFICIAL MUSIC HUB
+                    </div>
+                    <h1 class="font-display text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                        Non-Stop <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-emerald-400">Adivasi Timli & Gamit Hits</span>
+                    </h1>
+                    <p class="text-stone-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                        Welcome to the official streaming platform of <strong>DiL DAR ADIVASHI</strong> (@dildaradivashi). Stream Superhit Non-Stop Timli, Tur Tone DJ Mixes, Rodali, and Gamit songs!
+                    </p>
+                    <div class="pt-2 flex flex-wrap items-center gap-3">
+                        <button onclick="window.app.playFeaturedTrack()" class="flex items-center gap-2.5 px-6 py-3 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm shadow-xl transition-all">
+                            <i class="ph-fill ph-play text-lg"></i>
+                            <span>Play Superhit Timli</span>
+                        </button>
                     </div>
                 </section>
 
-                <!-- Embedded YouTube Video Player Drawer -->
+                <!-- YouTube Player Drawer -->
                 <section id="yt-player-section" class="hidden rounded-3xl overflow-hidden border border-amber-500/40 bg-[#14110f] shadow-2xl">
                     <div class="px-5 py-3.5 bg-stone-950/80 border-b border-tribal-border flex items-center justify-between">
                         <div class="flex items-center gap-2.5 min-w-0">
                             <i class="ph-fill ph-youtube-logo text-rose-500 text-xl shrink-0"></i>
                             <span id="yt-now-playing-title" class="text-sm font-bold text-white truncate">Now Playing</span>
                         </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <button onclick="window.app.closeYouTubeDrawer()" class="w-7 h-7 rounded-full bg-stone-800 text-stone-400 hover:text-white flex items-center justify-center">
-                                <i class="ph-bold ph-x"></i>
-                            </button>
-                        </div>
+                        <button onclick="window.app.closeYouTubeDrawer()" class="w-7 h-7 rounded-full bg-stone-800 text-stone-400 hover:text-white flex items-center justify-center">
+                            <i class="ph-bold ph-x"></i>
+                        </button>
                     </div>
                     <div class="aspect-video w-full max-h-[420px] bg-black">
                         <iframe id="yt-iframe" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </section>
 
-                <!-- Category Filter Pills -->
-                <section class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <h2 class="font-display text-lg font-bold text-stone-100 flex items-center gap-2">
-                            <i class="ph-fill ph-compass text-amber-400"></i>
-                            <span>Categories & Styles</span>
-                        </h2>
-                    </div>
-                    <div id="category-pills" class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar"></div>
-                </section>
-
-                <!-- Mobile Quick Nav -->
-                <div class="flex md:hidden items-center gap-2 bg-stone-900/70 p-1.5 rounded-xl border border-tribal-border">
-                    <button onclick="window.app.switchNav('home')" id="mob-nav-home" class="flex-1 py-2 rounded-lg text-xs font-bold bg-tribal-terracotta text-white text-center">All</button>
-                    <button onclick="window.app.switchNav('liked')" id="mob-nav-liked" class="flex-1 py-2 rounded-lg text-xs font-semibold text-stone-400 text-center">Liked (<span id="mob-liked-count">0</span>)</button>
-                    <button onclick="window.app.switchNav('community')" id="mob-nav-community" class="flex-1 py-2 rounded-lg text-xs font-semibold text-stone-400 text-center">Uploads (<span id="mob-community-count">0</span>)</button>
-                </div>
-
                 <!-- Cards Grid -->
                 <section class="space-y-4">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h2 id="grid-section-title" class="font-display text-xl font-bold text-white">DiL DAR ADIVASHI Official Releases</h2>
-                            <p class="text-xs text-stone-400">Click any card to play the song or watch on YouTube</p>
+                            <h2 id="grid-section-title" class="font-display text-xl font-bold text-white">Official Releases</h2>
+                            <p class="text-xs text-stone-400">Click any card to play</p>
                         </div>
                     </div>
                     <div id="songs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+                </section>
+                
+                <!-- Playlist Queue -->
+                <section class="space-y-4 pt-2">
+                    <div class="flex items-center justify-between border-b border-tribal-border pb-3">
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-white flex items-center gap-2">
+                                <i class="ph-fill ph-playlist text-emerald-400"></i>
+                                <span>Song Queue</span>
+                            </h2>
+                        </div>
+                        <span id="playlist-total-count" class="text-xs font-semibold px-3 py-1 rounded-full bg-stone-900 border border-stone-800 text-stone-300">0 Tracks</span>
+                    </div>
+
+                    <div class="bg-[#14110f] border border-tribal-border rounded-2xl overflow-hidden shadow-xl">
+                        <div id="playlist-rows" class="divide-y divide-stone-800/50"></div>
+                    </div>
                 </section>
 
             </div>
         </main>
     </div>
 
-    <!-- Bottom Audio Player Footer -->
-    <footer class="fixed bottom-0 left-0 right-0 h-24 bg-[#120e0c]/95 backdrop-blur-2xl border-t border-amber-500/20 px-4 sm:px-6 flex items-center justify-between gap-4 z-40 select-none shadow-2xl">
-        <div class="flex items-center gap-3.5 w-1/3 min-w-[160px] max-w-[320px]">
-            <div id="player-cover" class="w-14 h-14 rounded-xl bg-stone-800 shrink-0 overflow-hidden border border-white/10 shadow-md relative flex items-center justify-center"></div>
-            <div class="min-w-0 flex-1">
+    <!-- Bottom Player -->
+    <footer class="fixed bottom-0 left-0 right-0 h-20 bg-[#120e0c]/95 backdrop-blur-2xl border-t border-amber-500/20 px-4 sm:px-6 flex items-center justify-between z-40 select-none shadow-2xl">
+        <div class="flex items-center gap-3 w-[60%]">
+            <div id="player-cover" class="w-12 h-12 rounded-xl bg-stone-800 shrink-0 overflow-hidden border border-white/10 relative flex items-center justify-center"></div>
+            <div class="min-w-0">
                 <h4 id="player-title" class="font-bold text-xs sm:text-sm text-white truncate">Select a Song</h4>
                 <p id="player-artist" class="text-[11px] text-stone-400 truncate">DiL DAR ADIVASHI</p>
             </div>
         </div>
-
-        <div class="flex flex-col items-center justify-center flex-1 max-w-xl">
-            <div class="flex items-center gap-4 sm:gap-6 mb-1.5">
-                <button onclick="window.app.togglePlay()" id="btn-play-main" class="w-11 h-11 rounded-full bg-gradient-to-tr from-tribal-terracotta to-amber-400 hover:from-orange-500 text-stone-950 flex items-center justify-center shadow-lg transition-all">
-                    <i id="play-icon-main" class="ph-fill ph-play text-xl ml-0.5"></i>
-                </button>
-            </div>
-        </div>
-
-        <div class="hidden md:flex items-center justify-end gap-4 w-1/4 max-w-[240px]">
-            <div id="live-visualizer" class="flex items-end gap-1 h-5 px-2 opacity-30">
-                <span class="w-1 bg-amber-400 rounded-full eq-bar-1"></span>
-                <span class="w-1 bg-tribal-terracotta rounded-full eq-bar-2"></span>
-                <span class="w-1 bg-emerald-400 rounded-full eq-bar-3"></span>
-                <span class="w-1 bg-amber-300 rounded-full eq-bar-4"></span>
-            </div>
+        <div class="flex items-center gap-4">
+            <button onclick="window.app.togglePlay()" id="btn-play-main" class="w-12 h-12 rounded-full bg-gradient-to-tr from-tribal-terracotta to-amber-400 text-stone-950 flex items-center justify-center shadow-lg transition-all">
+                <i id="play-icon-main" class="ph-fill ph-play text-2xl ml-0.5"></i>
+            </button>
         </div>
     </footer>
 
     <!-- Add Song Modal -->
-    <div id="upload-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-[#181412] border border-amber-500/30 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl my-8">
+    <div id="upload-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-[#181412] border border-amber-500/30 rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl">
             <div class="px-6 py-5 bg-gradient-to-r from-[#2c150c] to-[#16221c] border-b border-tribal-border flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-white">Add Song</h3>
-                    </div>
-                </div>
-                <button onclick="window.app.closeUploadModal()" class="w-8 h-8 rounded-full bg-stone-800/80 text-stone-400 hover:text-white flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                <h3 class="font-display font-bold text-lg text-white">Add YouTube Song</h3>
+                <button onclick="window.app.closeUploadModal()" class="w-8 h-8 rounded-full bg-stone-800 text-stone-400 hover:text-white flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
             </div>
-
             <form id="upload-form" onsubmit="window.app.handleSongUpload(event)" class="p-6 space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-stone-300 mb-1.5">Song Title *</label>
                     <input type="text" id="up-title" required class="w-full px-3.5 py-2.5 rounded-xl bg-stone-900 border border-tribal-border text-sm text-white">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-1.5">YouTube Video Link</label>
-                    <input type="url" id="up-youtube-url" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-900 border border-tribal-border text-sm text-white">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-amber-400 mb-1.5">YouTube Link *</label>
+                    <input type="url" id="up-youtube-url" required class="w-full px-3.5 py-2.5 rounded-xl bg-stone-900 border border-tribal-border text-sm text-white" placeholder="https://youtube.com/...">
                 </div>
-                <div class="pt-3 flex items-center justify-end gap-3">
-                    <button type="submit" class="px-6 py-2.5 rounded-full text-xs font-bold bg-gradient-to-r from-tribal-terracotta to-amber-500 text-white">Publish</button>
+                <div class="pt-2 flex justify-end">
+                    <button type="submit" class="w-full px-6 py-3 rounded-xl text-sm font-bold bg-gradient-to-r from-tribal-terracotta to-amber-500 text-white shadow-lg">Save & Publish</button>
                 </div>
             </form>
         </div>
@@ -306,9 +210,96 @@
 
     <script>
         const DEFAULT_SONGS = [
-            {
-                id: 'yt-pXOaIx_lsUE', videoId: 'pXOaIx_lsUE', youtubeUrl: 'https://www.youtube.com/watch?v=pXOaIx_lsUE',
-                title: 'NON STOP BOLLYWOOD DJ SONG | TUR TONE', artist: 'DiL DAR ADIVASHI', region: 'Tur Tone', durationText: '28:48', isDefault: true
-            },
-            {
-                id: 'yt-t5BkwJjhYHQ', videoId: 't5Bkw
+            { id: 'yt-pXOaIx_lsUE', videoId: 'pXOaIx_lsUE', youtubeUrl: 'https://www.youtube.com/watch?v=pXOaIx_lsUE', title: 'NON STOP BOLLYWOOD DJ SONG | TUR TONE', artist: 'DiL DAR ADIVASHI', region: 'Tur Tone', durationText: '28:48' },
+            { id: 'yt-t5BkwJjhYHQ', videoId: 't5BkwJjhYHQ', youtubeUrl: 'https://www.youtube.com/watch?v=t5BkwJjhYHQ', title: 'Superhit Non Stop Adivasi Timli 2026', artist: 'DiL DAR ADIVASHI', region: 'Timli DJ', durationText: '1:23:05' },
+            { id: 'yt-VEJtCdHwt6c', videoId: 'VEJtCdHwt6c', youtubeUrl: 'https://www.youtube.com/watch?v=VEJtCdHwt6c', title: 'NON STOP BOLLYWOOD DJ SONG (Vol. 2)', artist: 'DiL DAR ADIVASHI', region: 'Tur Tone', durationText: '32:52' },
+            { id: 'yt-1OnGVeAZds0', videoId: '1OnGVeAZds0', youtubeUrl: 'https://www.youtube.com/watch?v=1OnGVeAZds0', title: 'Superhit Non Stop Adivasi Timli 2026', artist: 'DiL DAR ADIVASHI', region: 'Gamit Song', durationText: '47:06' },
+            { id: 'yt-oD3qmVDry24', videoId: 'oD3qmVDry24', youtubeUrl: 'https://www.youtube.com/watch?v=oD3qmVDry24', title: 'Non Stop Superhit Timli Adivasi Song 2026', artist: 'DiL DAR ADIVASHI', region: 'Rodali', durationText: '1:32:00' },
+            { id: 'yt-t95WW5VMfoE', videoId: 't95WW5VMfoE', youtubeUrl: 'https://www.youtube.com/watch?v=t95WW5VMfoE', title: '🔥Non Stop Adivasi Timli 2026 | Original DJ Mix', artist: 'DiL DAR ADIVASHI', region: 'Timli DJ', durationText: '1:29:00' }
+        ];
+
+        function extractYouTubeId(url) {
+            if (!url) return null;
+            const match = url.match(/^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        class DilDarApp {
+            constructor() {
+                const savedUploads = localStorage.getItem('dda_custom_songs');
+                this.communitySongs = savedUploads ? JSON.parse(savedUploads) : [];
+                this.currentSong = DEFAULT_SONGS[0];
+                this.isPlaying = false;
+                
+                this.renderAll();
+                this.loadSongIntoPlayer(DEFAULT_SONGS[0], false);
+            }
+
+            getAllSongs() { return [...this.communitySongs, ...DEFAULT_SONGS]; }
+
+            renderAll() {
+                const songs = this.getAllSongs();
+                
+                // Render Cards Grid
+                const gridHtml = songs.map(song => `
+                    <div onclick="window.app.selectAndPlay('${song.id}')" class="bg-[#181412] border border-[#2e2622] rounded-2xl p-3 cursor-pointer">
+                        <div class="aspect-video w-full rounded-xl overflow-hidden mb-3 relative bg-black">
+                            <img src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-sm text-white line-clamp-2">${song.title}</h3>
+                        <p class="text-xs text-stone-400 mt-1">${song.region || 'Song'}</p>
+                    </div>
+                `).join('');
+                document.getElementById('songs-grid').innerHTML = gridHtml;
+                
+                // Render Playlist Queue
+                const rowsHtml = songs.map((song, idx) => `
+                    <div onclick="window.app.selectAndPlay('${song.id}')" class="flex items-center gap-3 px-4 py-3 border-b border-stone-800/50 cursor-pointer hover:bg-stone-900/50">
+                        <div class="w-16 h-10 rounded-lg overflow-hidden shrink-0 bg-black">
+                            <img src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" class="w-full h-full object-cover">
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-xs sm:text-sm font-semibold text-stone-100 truncate">${song.title}</p>
+                            <p class="text-[11px] text-stone-400">${song.durationText || '30:00'} • ${song.region || 'Song'}</p>
+                        </div>
+                        <a href="${song.youtubeUrl}" target="_blank" onclick="event.stopPropagation()" class="text-rose-500 p-2"><i class="ph-fill ph-youtube-logo text-xl"></i></a>
+                    </div>
+                `).join('');
+                document.getElementById('playlist-rows').innerHTML = rowsHtml;
+                document.getElementById('playlist-total-count').textContent = `${songs.length} Tracks`;
+            }
+
+            loadSongIntoPlayer(song, autoPlay = false) {
+                if (!song) return;
+                this.currentSong = song;
+                document.getElementById('player-title').textContent = song.title;
+                document.getElementById('player-cover').innerHTML = `<img src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" class="w-full h-full object-cover">`;
+                if (autoPlay) this.playCurrent();
+            }
+
+            selectAndPlay(id) {
+                const s = this.getAllSongs().find(item => item.id === id);
+                if (s) this.loadSongIntoPlayer(s, true);
+            }
+
+            playCurrent() {
+                if (!this.currentSong) return;
+                this.isPlaying = true;
+                const ytSection = document.getElementById('yt-player-section');
+                const ytIframe = document.getElementById('yt-iframe');
+                document.getElementById('yt-now-playing-title').textContent = this.currentSong.title;
+                ytSection.classList.remove('hidden');
+                ytIframe.src = `https://www.youtube.com/embed/${this.currentSong.videoId}?autoplay=1&rel=0`;
+                document.getElementById('main-scroll').scrollTo({ top: 0, behavior: 'smooth' });
+                document.getElementById('play-icon-main').className = 'ph-fill ph-pause text-2xl';
+            }
+
+            closeYouTubeDrawer() {
+                document.getElementById('yt-iframe').src = '';
+                document.getElementById('yt-player-section').classList.add('hidden');
+                this.isPlaying = false;
+                document.getElementById('play-icon-main').className = 'ph-fill ph-play text-2xl ml-0.5';
+            }
+
+            togglePlay() { this.isPlaying ? this.closeYouTubeDrawer() : this.playCurrent(); }
+            playFeaturedTrack() { this.loadSongIntoPlayer
